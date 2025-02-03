@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 /**
  * ------------------------------------
- * Student All Routes
+ * Student All Routes Start
  * ------------------------------------
  * */
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'prefix' => 'student', 'as' => 'student.'], function () {
@@ -18,18 +18,25 @@ Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:student'], 'pr
 });
 
 /**
+ * ------------------------------------
+ * Student All Routes End
+ * ------------------------------------
+ * */
+
+/**
  * ----------------------------------
- * Instructor All Routes
+ * Instructor All Routes Start
  * ---------------------------------
  *  */
 Route::group(['middleware' => ['auth:web', 'verified', 'checkRole:instructor'], 'prefix' => 'instructor', 'as' => 'instructor.'], function () {
     Route::get('dashboard', [InstructorDashboardController::class, 'index'])->name('dashboard');
 });
 
-
-Route::get('/admin/dashboard', function () {
-    return view('admin.dashboard');
-})->middleware(['auth:admin', 'verified'])->name('admin.dashboard');
+/**
+ * ----------------------------------
+ * Instructor All Routes End
+ * ---------------------------------
+ *  */
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
